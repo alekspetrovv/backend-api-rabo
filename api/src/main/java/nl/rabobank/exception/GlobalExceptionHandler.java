@@ -30,10 +30,7 @@ public class GlobalExceptionHandler {
         logger.error("JSON Parse Error at {}: {}", path, e.getMessage());
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        // Provide a user-friendly message
-        String message = "The request body is malformed or contains invalid values.";
-
-        return new ErrorResponse(status.value(), status.getReasonPhrase(), message, path);
+        return new ErrorResponse(status.value(), status.getReasonPhrase(), e.getCause().getMessage(), path);
     }
 
     @ExceptionHandler(RecordNotFoundException.class)
