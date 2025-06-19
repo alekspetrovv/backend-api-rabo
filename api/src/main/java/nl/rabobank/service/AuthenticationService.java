@@ -2,6 +2,7 @@ package nl.rabobank.service;
 
 
 import lombok.RequiredArgsConstructor;
+import nl.rabobank.dto.CustomUserDetails;
 import nl.rabobank.exception.UserAlreadyExistsException;
 import nl.rabobank.mongo.document.user.UserDocument;
 import nl.rabobank.mongo.repository.UserRepository;
@@ -43,11 +44,7 @@ public class AuthenticationService {
         UserDocument userDoc = modelMapper.map(newUser, UserDocument.class);
         userRepository.save(userDoc);
 
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-                newUser.getEmail(),
-                newUser.getPassword(),
-                Collections.emptyList()
-        );
+        UserDetails userDetails = new CustomUserDetails(userDoc);
         return jwtService.generateToken(userDetails);
     }
 

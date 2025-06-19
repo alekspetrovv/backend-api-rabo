@@ -1,6 +1,7 @@
 package nl.rabobank.config;
 
 import lombok.RequiredArgsConstructor;
+import nl.rabobank.dto.CustomUserDetails;
 import nl.rabobank.mongo.document.user.UserDocument;
 import nl.rabobank.mongo.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -48,11 +49,7 @@ public class AppConfig {
             UserDocument userDoc = userRepository.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-            return new User(
-                    userDoc.getEmail(),
-                    userDoc.getPassword(),
-                    Collections.emptyList()
-            );
+            return new CustomUserDetails(userDoc);
         };
     }
 
