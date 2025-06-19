@@ -1,7 +1,9 @@
 package nl.rabobank.config;
 
 import lombok.RequiredArgsConstructor;
+import nl.rabobank.attorney.PowerOfAttorney;
 import nl.rabobank.dto.CustomUserDetails;
+import nl.rabobank.mongo.document.attorney.PowerOfAttorneyDocument;
 import nl.rabobank.mongo.document.user.UserDocument;
 import nl.rabobank.mongo.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -28,6 +30,18 @@ public class AppConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.createTypeMap(PowerOfAttorneyDocument.class, PowerOfAttorney.class)
+                .setConverter(context -> {
+                    PowerOfAttorneyDocument source = context.getSource();
+                    return new PowerOfAttorney(
+                            source.getId(),
+                            source.getGrantorId(),
+                            source.getGranteeId(),
+                            source.getAccountNumber(),
+                            source.getAccountType(),
+                            source.getAuthorizationType()
+                    );
+                });
         return modelMapper;
     }
 

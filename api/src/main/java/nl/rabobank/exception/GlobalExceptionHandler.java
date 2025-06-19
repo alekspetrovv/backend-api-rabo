@@ -72,4 +72,26 @@ public class GlobalExceptionHandler {
 
         return new ErrorResponse(status.value(), status.getReasonPhrase(), e.getMessage(), path);
     }
+
+    @ExceptionHandler(InvalidGrantException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleInvalidGrantException(InvalidGrantException e, WebRequest webRequest) {
+        String path = getRequestPath(webRequest);
+        logger.error("Invalid Grant Exception at {}: {}", path, e.getMessage());
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        return new ErrorResponse(status.value(), status.getReasonPhrase(), e.getMessage(), path);
+    }
+
+    @ExceptionHandler(DuplicatePowerOfAttorneyException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    public ErrorResponse handleDuplicatePowerOfAttorneyException(DuplicatePowerOfAttorneyException e, WebRequest webRequest) {
+        String path = getRequestPath(webRequest);
+        logger.error("Duplicate Power Of Attorney Exception at {}: {}", path, e.getMessage());
+        HttpStatus status = HttpStatus.CONFLICT;
+
+        return new ErrorResponse(status.value(), status.getReasonPhrase(), e.getMessage(), path);
+    }
 }

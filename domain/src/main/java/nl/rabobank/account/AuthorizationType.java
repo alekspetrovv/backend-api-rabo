@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum AccountType {
-    PAYMENT("PAYMENT"),
-    SAVING("SAVING");
+public enum AuthorizationType {
+    READ("READ"),
+    WRITE("WRITE");
 
     @JsonValue
     private final String value;
