@@ -7,10 +7,13 @@ import nl.rabobank.account.PaymentAccount;
 import nl.rabobank.account.SavingsAccount;
 import org.springframework.stereotype.Component;
 
+import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class AccountFactory {
+    private final Random random = new Random();
 
     public Account createAccount(AccountType accountType, String ownerId) {
         String newAccountNumber = generateNewAccountNumber();
@@ -22,8 +25,16 @@ public class AccountFactory {
         };
     }
 
-    private String generateNewAccountNumber() {
-        return "NL" + String.format("%02d", (int) (Math.random() * 99)) + "RABO" +
-               UUID.randomUUID().toString().replace("-", "").substring(0, 10).toUpperCase();
+    public String generateNewAccountNumber() {
+        String countryCode = "NL";
+        String checkDigits = String.format("%02d", random.nextInt(100));
+
+        String bankCode = "RABO";
+
+        String accountId = random.ints(10, 0, 10)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining());
+
+        return countryCode + checkDigits + bankCode + accountId;
     }
 }
