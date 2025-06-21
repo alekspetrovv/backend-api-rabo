@@ -15,5 +15,11 @@ services:
       APP_MONGO_PASSWORD: test
     restart: always
 
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
 volumes:
   mongo_data:
