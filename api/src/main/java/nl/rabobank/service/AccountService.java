@@ -9,6 +9,7 @@ import nl.rabobank.mongo.document.account.AccountDocument;
 import nl.rabobank.mongo.repository.AccountRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class AccountService {
     private final ModelMapper modelMapper;
     private final AccountFactory accountFactory;
 
+    @Transactional
     public Account createAccount(AccountType accountType, String ownerId) {
         Account domainAccount = accountFactory.createAccount(accountType, ownerId);
 

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 
@@ -29,6 +30,7 @@ public class AuthenticationService {
     private final UserDetailsService userDetailsService;
     private final ModelMapper modelMapper;
 
+    @Transactional
     public String register(String email, String name, String rawPassword) {
         if (userRepository.findByEmail(email).isPresent()) {
             throw new UserAlreadyExistsException("Email is already in use.");
@@ -48,6 +50,7 @@ public class AuthenticationService {
         return jwtService.generateToken(userDetails);
     }
 
+    @Transactional(readOnly = true)
     public String login(String email, String password) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password)

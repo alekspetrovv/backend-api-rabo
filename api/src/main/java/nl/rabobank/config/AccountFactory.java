@@ -8,7 +8,6 @@ import nl.rabobank.account.SavingsAccount;
 import org.springframework.stereotype.Component;
 
 import java.util.Random;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
