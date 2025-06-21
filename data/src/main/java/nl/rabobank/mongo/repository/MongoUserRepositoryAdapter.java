@@ -28,4 +28,10 @@ public class MongoUserRepositoryAdapter implements IUserRepository {
         return mongoDbUserRepository.findByEmail(email)
                 .map(userDocument -> modelMapper.map(userDocument, User.class));
     }
+
+    @Override
+    public Optional<User> findById(String id) {
+        return mongoDbUserRepository.findById(id)
+                .map(userDocument -> modelMapper.map(userDocument, User.class));
+    }
 }

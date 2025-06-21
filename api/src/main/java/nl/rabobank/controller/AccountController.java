@@ -6,7 +6,7 @@ import nl.rabobank.account.Account;
 import nl.rabobank.dto.CreateAccountDto;
 import nl.rabobank.dto.CustomUserDetails;
 import nl.rabobank.dto.ReadAccountDto;
-import nl.rabobank.service.AccountService;
+import nl.rabobank.account.AccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

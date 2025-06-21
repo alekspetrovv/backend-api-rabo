@@ -2,7 +2,6 @@ package nl.rabobank.mongo.document.account;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import nl.rabobank.account.AccountType;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -21,7 +20,7 @@ public class AccountDocument {
     @Indexed
     @Field("owner_id")
     private String ownerId;
-    private AccountType type;
+    private String type;
     private BigDecimal balance;
     @CreatedDate
     private Instant createdAt;

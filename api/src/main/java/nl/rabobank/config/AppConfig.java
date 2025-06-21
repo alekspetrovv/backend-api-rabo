@@ -1,9 +1,9 @@
 package nl.rabobank.config;
 
 import lombok.RequiredArgsConstructor;
-import nl.rabobank.account.AccountType;
-import nl.rabobank.account.AuthorizationType;
+import nl.rabobank.account.*;
 import nl.rabobank.attorney.PowerOfAttorney;
+import nl.rabobank.mongo.document.account.AccountDocument;
 import nl.rabobank.mongo.document.attorney.PowerOfAttorneyDocument;
 import nl.rabobank.security.CustomUserDetailsService;
 import org.modelmapper.ModelMapper;
@@ -23,6 +23,17 @@ public class AppConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.createTypeMap(AccountDocument.class, Account.class)
+                .setProvider(request -> {
+                    AccountDocument source = (AccountDocument) request.getSource();
+                    AccountType accountTypeFromDocument = AccountType.valueOf(source.getType());
+                    if (accountTypeFromDocument == AccountType.PAYMENT) {
+                        return new PaymentAccount(source.getAccountNumber(), source.getOwnerId(), accountTypeFromDocument);
+                    } else if (accountTypeFromDocument == AccountType.SAVING) {
+                        return new SavingsAccount(source.getAccountNumber(), source.getOwnerId(), accountTypeFromDocument);
+                    }
+                    throw new IllegalArgumentException("Unknown AccountType during AccountDocument to Account mapping: " + source.getType());
+                });
         modelMapper.createTypeMap(PowerOfAttorneyDocument.class, PowerOfAttorney.class)
                 .setConverter(context -> {
                     PowerOfAttorneyDocument source = context.getSource();

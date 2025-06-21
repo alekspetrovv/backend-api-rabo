@@ -1,10 +1,4 @@
-package nl.rabobank.config;
-
-
-import nl.rabobank.account.Account;
-import nl.rabobank.account.AccountType;
-import nl.rabobank.account.PaymentAccount;
-import nl.rabobank.account.SavingsAccount;
+package nl.rabobank.account;
 import org.springframework.stereotype.Component;
 
 import java.util.Random;
