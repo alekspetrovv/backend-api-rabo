@@ -4,8 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import nl.rabobank.dto.CustomUserDetails;
-import nl.rabobank.mongo.document.user.UserDocument;
-import nl.rabobank.service.JwtService;
+import nl.rabobank.security.JwtService;
+import nl.rabobank.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,9 +34,9 @@ class JwtServiceTest {
         ReflectionTestUtils.setField(jwtService, "secretKey", testSecretKey);
         ReflectionTestUtils.setField(jwtService, "jwtExpiration", testExpirationInMillis);
 
-        UserDocument userDocument = new UserDocument();
-        userDocument.setEmail("test@rabobank.nl");
-        userDetails = new CustomUserDetails(userDocument);
+        User user = new User();
+        user.setEmail("test@rabobank.nl");
+        userDetails = new CustomUserDetails(user);
     }
 
     @Test
@@ -60,9 +60,9 @@ class JwtServiceTest {
     void isTokenValid_withDifferentUser_shouldReturnFalse() {
         String token = jwtService.generateToken(userDetails);
 
-        UserDocument otherUserDoc = new UserDocument();
-        otherUserDoc.setEmail("other-user@rabobank.nl");
-        UserDetails otherUserDetails = new CustomUserDetails(otherUserDoc);
+        User otherUser = new User();
+        otherUser.setEmail("other-user@rabobank.nl");
+        UserDetails otherUserDetails = new CustomUserDetails(otherUser);
 
         boolean isValid = jwtService.isTokenValid(token, otherUserDetails);
         assertThat(isValid).isFalse();
