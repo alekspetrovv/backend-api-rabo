@@ -2,7 +2,6 @@ package nl.rabobank.security;
 
 import lombok.RequiredArgsConstructor;
 import nl.rabobank.dto.CustomUserDetails;
-import nl.rabobank.service.JwtService;
 import nl.rabobank.user.ITokenGenerator;
 import nl.rabobank.user.User;
 import org.springframework.stereotype.Component;

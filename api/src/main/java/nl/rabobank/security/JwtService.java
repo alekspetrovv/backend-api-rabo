@@ -1,4 +1,4 @@
-package nl.rabobank.service;
+package nl.rabobank.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -42,8 +42,8 @@ public class AppConfig {
                             source.getGrantorId(),
                             source.getGranteeId(),
                             source.getAccountNumber(),
-                            AccountType.valueOf(source.getAccountType()),
-                            AuthorizationType.valueOf(source.getAuthorizationType())
+                            source.getAccountType(),
+                            source.getAuthorizationType()
                     );
                 });
         return modelMapper;

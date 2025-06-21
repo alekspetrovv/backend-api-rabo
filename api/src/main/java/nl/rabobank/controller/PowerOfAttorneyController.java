@@ -4,10 +4,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nl.rabobank.account.AuthorizationType;
 import nl.rabobank.attorney.PowerOfAttorney;
+import nl.rabobank.attorney.PowerOfAttorneyService;
 import nl.rabobank.dto.CreatePowerOfAttorneyDto;
 import nl.rabobank.dto.CustomUserDetails;
 import nl.rabobank.dto.ReadPowerOfAttorneyDto;
-import nl.rabobank.service.PowerOfAttorneyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +30,13 @@ public class PowerOfAttorneyController {
             @AuthenticationPrincipal CustomUserDetails currentUser,
             @Valid @RequestBody CreatePowerOfAttorneyDto createPowerOfAttorneyDto
     ) {
-        PowerOfAttorney createdPowerOfAttorney = powerOfAttorneyService.createPowerOfAttorney(currentUser.id(), createPowerOfAttorneyDto);
+        PowerOfAttorney createdPowerOfAttorney = powerOfAttorneyService.createPowerOfAttorney(
+                currentUser.id(),
+                createPowerOfAttorneyDto.getGranteeId(),
+                createPowerOfAttorneyDto.getAccountNumber(),
+                createPowerOfAttorneyDto.getAccountType(),
+                createPowerOfAttorneyDto.getAuthorizationType()
+        );
         ReadPowerOfAttorneyDto responseDto = modelMapper.map(createdPowerOfAttorney, ReadPowerOfAttorneyDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
