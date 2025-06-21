@@ -1,6 +1,6 @@
 package nl.rabobank.dto;
 
-import nl.rabobank.mongo.document.user.UserDocument;
+import nl.rabobank.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
@@ -13,7 +13,7 @@ public record CustomUserDetails(
         String password
 ) implements UserDetails {
 
-    public CustomUserDetails(UserDocument user) {
+    public CustomUserDetails(User user) {
         this(user.getId(), user.getName(), user.getEmail(), user.getPassword());
     }
 

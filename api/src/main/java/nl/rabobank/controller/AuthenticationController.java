@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import nl.rabobank.dto.LoginDto;
 import nl.rabobank.dto.ReadLoginDto;
 import nl.rabobank.dto.RegisterDto;
-import nl.rabobank.service.AuthenticationService;
+import nl.rabobank.user.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

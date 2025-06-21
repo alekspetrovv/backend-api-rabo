@@ -1,4 +1,4 @@
-package nl.rabobank.config;
+package nl.rabobank.security;
 
 
 import jakarta.servlet.http.HttpServletResponse;
