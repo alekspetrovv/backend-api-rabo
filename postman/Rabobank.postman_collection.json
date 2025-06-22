@@ -11,6 +11,18 @@
 			"item": [
 				{
 					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"token\", pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -19,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"alm.petrov@gmail.com\",\n    \"name\": \"Aleks Petrov\",\n    \"password\": \"12345678\"\n}",
+							"raw": "{\n    \"email\": \"ap.petrov@gmail.com\",\n    \"name\": \"Aleks Petrov\",\n    \"password\": \"12345678\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -72,7 +84,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"pv.petrov@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"raw": "{\n    \"email\": \"p.petrov@gmail.com\",\n    \"password\": \"12345678\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -105,7 +117,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"type\": \"SAVING\"\n}",
+							"raw": "{\n    \"type\": \"SAVING\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,7 +149,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"granteeId\": \"424af427-65bf-4904-847f-b964aeb60454\",\n  \"accountNumber\": \"NL61RABO9523612098\",\n  \"accountType\": \"SAVING\",\n  \"authorizationType\": \"WRITE\"\n}",
+							"raw": "{\n  \"granteeId\": \"9fa2283b-9bf9-41f8-b7d9-e28c5186f373\",\n  \"accountNumber\": \"NL15RABO7861096131\",\n  \"accountType\": \"SAVING\",\n  \"authorizationType\": \"READ\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -163,7 +175,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{uri}}/api/power-of-attorneys/my-grants?permission=WRITE",
+							"raw": "{{uri}}/api/power-of-attorneys/my-grants?permission=READ",
 							"host": [
 								"{{uri}}"
 							],
@@ -175,7 +187,7 @@
 							"query": [
 								{
 									"key": "permission",
-									"value": "WRITE"
+									"value": "READ"
 								}
 							]
 						}
