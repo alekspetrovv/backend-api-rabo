@@ -1,7 +1,9 @@
 package nl.rabobank.config;
 
-import lombok.RequiredArgsConstructor;
-import nl.rabobank.account.*;
+import nl.rabobank.account.Account;
+import nl.rabobank.account.AccountType;
+import nl.rabobank.account.PaymentAccount;
+import nl.rabobank.account.SavingsAccount;
 import nl.rabobank.attorney.PowerOfAttorney;
 import nl.rabobank.mongo.document.account.AccountDocument;
 import nl.rabobank.mongo.document.attorney.PowerOfAttorneyDocument;

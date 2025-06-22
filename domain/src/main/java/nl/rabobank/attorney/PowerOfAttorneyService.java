@@ -1,7 +1,6 @@
 package nl.rabobank.attorney;
 
 import lombok.RequiredArgsConstructor;
-import nl.rabobank.account.Account;
 import nl.rabobank.account.AccountType;
 import nl.rabobank.account.AuthorizationType;
 import nl.rabobank.account.IAccountRepository;
@@ -9,7 +8,6 @@ import nl.rabobank.exception.DuplicatePowerOfAttorneyException;
 import nl.rabobank.exception.InvalidGrantException;
 import nl.rabobank.exception.RecordNotFoundException;
 import nl.rabobank.user.IUserRepository;
-import nl.rabobank.user.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +18,6 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class PowerOfAttorneyService {
-
     private final IPowerOfAttorneyRepository powerOfAttorneyRepository;
     private final IAccountRepository accountRepository;
     private final IUserRepository userRepository;
